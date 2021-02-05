@@ -1,4 +1,6 @@
-import { greet } from './utils';
+import config from "./config";
+import app from "./app";
 
-const helloWorldGreeting = greet('WOrLD').toLowerCase();
-console.log(helloWorldGreeting); // eslint-disable-line
+const PORT = config.ports.server;
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
