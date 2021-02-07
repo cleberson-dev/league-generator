@@ -6,15 +6,17 @@ import config, { getEnvironmentBasedValue } from './config';
 
 const app = express();
 
-const morganLogFormat = getEnvironmentBasedValue({
-  production: 'combined',
-  development: 'dev'
-});
-const morganStream = config.environment === 'production' ?
-  fs.createWriteStream('logs') :
-  process.stdout;
+const morganConfig: morgan.Options<Request, Response> & { format: string } = {
+  format: getEnvironmentBasedValue({
+    production: 'combined',
+    development: 'dev'
+  }),
+  stream: config.environment === 'production' ?
+    fs.createWriteStream('logs') :
+    process.stdout
+}
 
-app.use(morgan(morganLogFormat, { stream: morganStream }));
+app.use(morgan(morganConfig.format, { ...morganConfig }));
 
 graphQLAPI.applyMiddleware({ app, path: '/graphql' });
 
