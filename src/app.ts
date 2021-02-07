@@ -9,12 +9,12 @@ const app = express();
 const morganLogFormat = {
   production: 'combined',
   development: 'dev'
-}[config.environment()];
+}[config.environment];
 
 
 app.use(morgan(morganLogFormat, {
   stream:
-    config.environment() === 'production' ?
+    config.environment === 'production' ?
       fs.createWriteStream('logs') :
       process.stdout
 }));
