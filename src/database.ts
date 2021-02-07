@@ -6,6 +6,9 @@ const dbConfigs: Record<EnvironmentTypes, knex.Config> = {
     client: 'sqlite3',
     connection: {
       filename: './db.sqlite'
+    },
+    migrations: {
+      directory: './src/migrations'
     }
   },
   production: {

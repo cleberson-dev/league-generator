@@ -8,7 +8,9 @@
     "start:prod": "npm run build && pm2-runtime dist/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "migrate": "ts-node src/migrate",
+    "migrate:make": "ts-node src/migrate make"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +33,7 @@
     "express": "^4.17.1",
     "graphql": "^14.7.0",
     "knex": "^0.21.17",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "sqlite3": "^4.2.0"
   }
 }
