@@ -2,22 +2,19 @@ import express, { Request, Response } from "express";
 import morgan from 'morgan';
 import fs from 'fs';
 import graphQLAPI from './graphql';
-import config from './config';
+import config, { getEnvironmentBasedValue } from './config';
 
 const app = express();
 
-const morganLogFormat = {
+const morganLogFormat = getEnvironmentBasedValue({
   production: 'combined',
   development: 'dev'
-}[config.environment];
+});
+const morganStream = config.environment === 'production' ?
+  fs.createWriteStream('logs') :
+  process.stdout;
 
-
-app.use(morgan(morganLogFormat, {
-  stream:
-    config.environment === 'production' ?
-      fs.createWriteStream('logs') :
-      process.stdout
-}));
+app.use(morgan(morganLogFormat, { stream: morganStream }));
 
 graphQLAPI.applyMiddleware({ app, path: '/graphql' });
 

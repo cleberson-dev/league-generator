@@ -1,7 +1,7 @@
 import knex from 'knex';
-import config, { EnvironmentTypes } from './config';
+import config, { getEnvironmentBasedValue } from './config';
 
-const dbConfigs: Record<EnvironmentTypes, knex.Config> = {
+export default knex(getEnvironmentBasedValue<knex.Config>({
   development: {
     client: 'sqlite3',
     connection: {
@@ -20,6 +20,4 @@ const dbConfigs: Record<EnvironmentTypes, knex.Config> = {
       database: config.database.name
     }
   }
-}
-
-export default knex(dbConfigs[config.environment()]);
+}));

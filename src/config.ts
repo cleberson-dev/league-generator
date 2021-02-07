@@ -10,6 +10,10 @@ function getEnvironment(): EnvironmentTypes {
   }
 }
 
+export function getEnvironmentBasedValue<T>(values: Record<EnvironmentTypes, T>): T {
+  return values[getEnvironment()];
+}
+
 export default {
   environment: getEnvironment(),
   database: {
