@@ -8,9 +8,9 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    greeting: (): string => 'Hello, world!'
-  }
-}
+    greeting: (): string => 'Hello, world!',
+  },
+};
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
