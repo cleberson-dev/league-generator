@@ -1,4 +1,4 @@
-import db from './database';
+import db from 'main/database';
 
 const [type, ...args] = process.argv.slice(2);
 
