@@ -28,4 +28,5 @@ export default {
   ports: {
     server: 5000,
   },
+  tokenSecret: 'temporarysecretsshh'
 };
