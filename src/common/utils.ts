@@ -9,3 +9,16 @@ export function generateTeamsIds(amount: number) {
 
   return teamsIds;
 }
+
+export function randomizeArray<T>(arr: T[]): T[] {
+  const randomizedArr = [...arr];
+
+  const arrSize = randomizedArr.length;
+  for (let i = 0; i < arrSize; i += 1) {
+    const randomIdx = Math.round(Math.random() * (arrSize - 1));
+    const tmp = randomizedArr[i];
+    randomizedArr[i] = randomizedArr[randomIdx];
+    randomizedArr[randomIdx] = tmp;
+  }
+  return randomizedArr; 
+}
