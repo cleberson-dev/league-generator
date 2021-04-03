@@ -38,7 +38,7 @@ export default class GetRoundMatchesUseCase {
 
     return matches.map(match => {
       const home = teams.find(team => team.id === match.home.id) as Team;
-      const away = teams.find(team => team.id === match.home.id) as Team;
+      const away = teams.find(team => team.id === match.away.id) as Team;
 
       return {
         id: match.id as SavedMatchId,
