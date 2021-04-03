@@ -5,7 +5,7 @@ const TABLE_NAME = 'league_team';
 export const up = async (knex: Knex): Promise<void> => (
   knex.schema.createTable(TABLE_NAME, table => {
     table.bigInteger('league_id').unsigned().notNullable()
-      .references('league_id').inTable('league');
+      .references('league_id').inTable('league').onDelete('CASCADE');
     table.bigInteger('team_id').unsigned().notNullable()
       .references('team_id').inTable('team');
   })

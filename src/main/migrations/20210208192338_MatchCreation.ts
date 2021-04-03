@@ -10,10 +10,12 @@ export const up = async (knex: Knex): Promise<void> => (
     table.integer('away_score').unsigned().defaultTo(0);
     table.string('match_place');
     table.dateTime('match_time');
+    table.boolean('is_finished').defaultTo(false);
 
     table.bigInteger('league')
       .unsigned().notNullable()
-      .references('league_id').inTable('league');
+      .references('league_id').inTable('league')
+      .onDelete('CASCADE');
     
     table.bigInteger('home_team')
       .unsigned().notNullable()
