@@ -1,0 +1,130 @@
+import { gql } from 'apollo-server-express';
+
+export default gql`
+	type Query {
+		league(id: Int!): LeagueDetailed
+		myLeagues: [LeagueSummary!]!
+
+		myTeams(userId: Int!): [Team!]!
+		
+		match(id: Int!): GetMatchPayload
+		fixturesByRound(leagueId: Int!, round: Int!): [Match!]!
+	}
+
+
+
+	type Mutation {
+		login(args: UserLoginArgs!): UserResponse!
+		register(args: UserRegisterArgs!): UserResponse!
+
+		createLeague(args: CreateLeagueArgs!): LeagueDetailed!
+		deleteLeague(id: Int!): Boolean!
+
+		score(matchId: Int!, scoringTeam: Int!): Match!
+		updateMatch(args: UpdateMatchArgs!): Match!
+	}
+
+
+
+
+
+	interface ITeam {
+		id: Int!
+		name: String!
+		code: String!
+	}
+
+	type Team implements ITeam { }
+
+	type TeamStatsGoals {
+		scored: Int!
+		conceded: Int!
+	}
+
+	type TeamStats {
+		teamId: Int!
+		points: Int!
+		matches: Int!
+		wins: Int!
+		draws: Int!
+		losses: Int!
+		goals: TeamStatsGoals!
+	}
+
+	interface ILeague {
+		id: Int!
+		name: String!
+		twoLegged: Boolean!
+	}
+
+	type LeagueSummary implements ILeague {}
+	type LeagueDetailed implements ILeague {
+		teams: [Team!]!
+		table: [TeamStats!]!
+		fixtures: [[Match!]!]!
+	}
+
+
+	type MatchTeam {
+		id: Int!
+		score: Int!
+	}
+
+	interface IMatch {
+		id: Int!
+		round: Int!
+		finished: Boolean!
+		home: MatchTeam!
+		away: MatchTeam!
+	}
+	type Match implements IMatch {}
+	type GetMatchPayload implements IMatch {
+		league: LeagueSummary!
+		home: GetMatchTeam!
+		away: GetMatchTeam!
+	}
+	type GetMatchTeam implements ITeam {
+		score: Int!
+	}
+
+
+	type User {
+		username: String!
+		email: String
+		name: String
+	}
+
+	type UserLoginArgs {
+		usernameOrEmail: String!
+		password: String!
+	}
+
+	type UserRegisterArgs {
+		username: String!
+		password: String!
+		password2: String!
+		email: String
+		name: String
+	}
+
+	type AuthResponse {
+		token: String!
+		user: AuthResponseUser!
+	}
+
+	type AuthResponseUser {
+		username: String!
+	}
+
+	type CreateLeagueArgs {
+		name: String!
+		teamsIds: [Int!]!
+		twoLegged: Boolean
+	}
+
+	type UpdateMatchArgs {
+		matchId: Int!
+		homeScore: Int
+		awayScore: Int
+	}
+`;
