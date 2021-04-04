@@ -19,10 +19,16 @@ export default class TeamRepository implements ITeamRepository {
   async save(team: Team): Promise<void> {
     const table = db('team');
 
+    const payload = {
+      team_name: team.name,
+      team_code: team.code,
+      team_owner: team.ownerId
+    };
+
     if (team.id) {
-      await table.where({ team_id: team.id }).first().update(team);
+      await table.where({ team_id: team.id }).first().update(payload);
     } else {
-      const [id] = await table.insert(team).returning('team_id');
+      const [id] = await table.insert(payload).returning('team_id');
       team.id = id;
     }
   }

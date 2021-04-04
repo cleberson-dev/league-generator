@@ -46,13 +46,22 @@ export default class UserRepository implements IUserRepository {
   async save(newUser: User): Promise<void> {
     const table = db('user_account');
 
+    const payload = {
+      username: newUser.username,
+      password: newUser.password,
+      email: newUser.email,
+      presentation_name: newUser.presentationName
+    };
+
     if (newUser.id) {
       await table
         .where({ user_id: newUser.id })
         .first()
-        .update(newUser);
+        .update(payload);
     } else {
-      const [id] = await table.insert(newUser).returning('user_id');
+      const [id] = await table
+        .insert(payload)
+        .returning('user_id');
       newUser.id = id;
     }
   }

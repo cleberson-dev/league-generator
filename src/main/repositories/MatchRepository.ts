@@ -19,13 +19,23 @@ export default class MatchRepository implements IMatchRepository {
   async save(newMatch: Match): Promise<void> {
     const table = db('match');
 
+    const payload = {
+      round_number: newMatch.roundNumber,
+      is_finished: newMatch.finished,
+      league: newMatch.leagueId,
+      home_team: newMatch.home.id,
+      home_score: newMatch.homeScore,
+      away_team: newMatch.away.id,
+      away_score: newMatch.awayScore
+    };
+
     if (newMatch.id) {
       await table
         .where({ match_id: newMatch.id })
         .first()
-        .update(newMatch);
+        .update(payload);
     } else {
-      const [id] = await table.insert(newMatch).returning('match_id');
+      const [id] = await table.insert(payload).returning('match_id');
       newMatch.id = id;
     }
   }

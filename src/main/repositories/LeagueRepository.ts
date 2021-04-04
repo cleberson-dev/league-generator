@@ -43,14 +43,20 @@ export default class LeagueRepository implements ILeagueRepository {
   }
 
   async save(newLeague: League): Promise<void> {
+    const payload = {
+      league_name: newLeague.name,
+      two_legged: newLeague.twoLegged,
+      league_owner: newLeague.ownerId
+    };
+
     if (newLeague.id) {
       await this.table
         .where({ league_id: newLeague.id })
         .first()
-        .update(newLeague);
+        .update(payload);
     } else {
       const [id] = await this.table
-        .insert(newLeague)
+        .insert(payload)
         .returning('league_id');
       newLeague.id = id;
     }
