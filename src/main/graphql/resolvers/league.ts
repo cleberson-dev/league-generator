@@ -1,6 +1,6 @@
 import ITableCalculator from "common/ITableCalculator";
 import { ILeagueRepository, IMatchRepository, ITeamRepository, IUserRepository, SavedLeagueId } from "common/repositories";
-import { MatchRepository, TeamRepository, LeagueRepository, UserRepository } from "main/database";
+import { MatchRepository, TeamRepository, LeagueRepository, UserRepository } from "main/repositories";
 import LeagueFixturesGenerator from "main/LeagueFixturesGenerator";
 import TableCalculator from "main/TableCalculator";
 import CreateLeagueUseCase from "useCases/CreateLeague";

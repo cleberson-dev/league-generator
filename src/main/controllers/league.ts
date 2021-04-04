@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { LeagueRepository, MatchRepository, TeamRepository, UserRepository } from "main/database";
+import { LeagueRepository, MatchRepository, TeamRepository, UserRepository } from "main/repositories";
 import LeagueFixturesGenerator from "main/LeagueFixturesGenerator";
 import { ILeagueRepository, IMatchRepository, ITeamRepository, IUserRepository } from "common/repositories";
 import ILeagueFixturesGenerator from "common/ILeagueFixturesGenerator";
@@ -26,9 +26,8 @@ export default class LeagueController {
     );
   
     const { name, teams, twoLegged } = req.body;
-    const { userId } = req.body; // TODO: GET FROM ANOTHER PLACE
     const result = await useCase.execute({
-      userId,
+      userId: req.user?.id as number,
       leagueName: name, leagueTeams: teams,
       twoLegged
     });

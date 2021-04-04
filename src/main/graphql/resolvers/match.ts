@@ -1,5 +1,5 @@
 import { ILeagueRepository, IMatchRepository, ITeamRepository } from "common/repositories";
-import { MatchRepository, TeamRepository, LeagueRepository } from "main/database";
+import { MatchRepository, TeamRepository, LeagueRepository } from "main/repositories";
 import ChangeMatchUseCase from "useCases/ChangeMatch";
 import GetMatchUseCase from "useCases/GetMatch";
 import GetRoundMatchesUseCase from "useCases/GetRoundMatches";

@@ -1,5 +1,5 @@
 import { ITeamRepository, SavedTeamId } from "common/repositories"
-import { TeamRepository } from "main/database"
+import { TeamRepository } from "main/repositories"
 import GetUserTeamsUseCase from "useCases/GetUserTeams"
 
 const teamRepository: ITeamRepository = TeamRepository.getInstance();

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import CodeGenerator from "main/CodeGenerator";
-import { TeamRepository } from "main/database";
+import { TeamRepository } from "main/repositories";
 import { ITeamRepository } from "common/repositories";
 import CreateTeamUseCase from "useCases/CreateTeam";
 import GetUserTeamsUseCase from "useCases/GetUserTeams";

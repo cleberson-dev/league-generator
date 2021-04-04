@@ -1,6 +1,6 @@
 import { IUserRepository } from "common/repositories";
 import Argon2Hasher from "main/Argon2Hasher";
-import { UserRepository } from "main/database";
+import { UserRepository } from "main/repositories";
 import JWTTokenGenerator from "main/JWTTokenGenerator";
 import LoginUserUseCase from "useCases/LoginUser";
 import RegisterUserUseCase from "useCases/RegisterUser";

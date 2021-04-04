@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ILeagueRepository, IMatchRepository, ITeamRepository } from "common/repositories";
-import { LeagueRepository, MatchRepository, TeamRepository } from "main/database";
+import { LeagueRepository, MatchRepository, TeamRepository } from "main/repositories";
 import ChangeMatchUseCase from "useCases/ChangeMatch";
 import GetMatchUseCase from "useCases/GetMatch";
 

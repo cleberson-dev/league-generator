@@ -1,11 +1,5 @@
 import knex from 'knex';
 import config, { getEnvironmentBasedValue } from 'common/config';
-import LeagueRepository from 'main/database/LeagueRepository';
-import MatchRepository from 'main/database/MatchRepository';
-import TeamRepository from 'main/database/TeamRepository';
-import UserRepository from 'main/database/UserRepository';
-
-export { LeagueRepository, MatchRepository, TeamRepository, UserRepository };
 
 export default knex(
   getEnvironmentBasedValue<knex.Config>({
