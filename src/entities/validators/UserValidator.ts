@@ -8,7 +8,7 @@ export type UserProps = {
 
 const USERNAME_MIN_LENGTH = 8;
 const USERNAME_MAX_LENGTH = 16;
-const PASSWORD_MAX_LENGTH = 72;
+const PASSWORD_MAX_LENGTH = 120;
 
 export default class UserValidator {
   static validate(props: UserProps): void {
