@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && node .",
     "start:prod": "npm run build && pm2-runtime dist/index.js",
-    "dev": "concurrently \"npm run build\" \"node .\"",
+    "dev": "concurrently \"ttsc -w\" \"nodemon .\"",
     "build": "ttsc",
     "test": "jest",
     "migrate": "ts-node src/migrate",
