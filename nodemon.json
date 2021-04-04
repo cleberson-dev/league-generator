@@ -1,6 +1,6 @@
 {
   "ignore": ["*.spec.ts"],
   "execMap": {
-    "ts": "ts-node"
+    "ts": "ts-node -C ttypescript"
   }
 }
