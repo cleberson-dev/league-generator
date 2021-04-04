@@ -11,6 +11,7 @@ export default knex(
       migrations: {
         directory: './src/main/migrations',
       },
+      useNullAsDefault: true
     },
     production: {
       client: 'pg',
