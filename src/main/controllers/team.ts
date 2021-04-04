@@ -12,9 +12,7 @@ export default class TeamController {
   static async getUserTeams(req: Request, res: Response) {
     const useCase = new GetUserTeamsUseCase(teamRepository);
 
-    const { userId } = req.body; // Get from somewhere else
-
-    const result = await useCase.execute({ userId });
+    const result = await useCase.execute({ userId: req.user?.id as number });
 
     return res.status(200).send(result);
   }
@@ -25,8 +23,7 @@ export default class TeamController {
     );
   
     const { teamName } = req.body;
-    const { userId } = req.body; // TODO: CHANGE USER ID ORIGIN
-    const result = await useCase.execute({ teamName, userId });
+    const result = await useCase.execute({ teamName, userId: req.user?.id as number });
   
     return res.send(201).send(result);
   }

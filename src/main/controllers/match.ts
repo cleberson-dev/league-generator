@@ -13,10 +13,14 @@ export default class MatchController {
     const useCase = new ChangeMatchUseCase(matchRepository, leagueRepository);
 
     const matchId = Number(req.params.matchId);
-    const { userId } = req.body; // GET USER ID FROM SOMEWHERE ELSE
     const { homeScore, awayScore } = req.body;
     
-    const result = await useCase.execute({ userId, matchId, homeScore, awayScore });
+    const result = await useCase.execute({ 
+      userId: req.user?.id as number,
+      matchId,
+      homeScore,
+      awayScore
+    });
 
     return res.status(200).send(result);
   }
